@@ -21,7 +21,16 @@ type Post = {
     updated_at: string;
 };
 
-export const posts = new Hono<{ Bindings: Bindings }>();
+type Variables = {
+    user?: {
+        id: string;
+        name: string;
+        avatar?: string;
+        isAdmin: boolean;
+    };
+};
+
+export const posts = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 
 // Get all published posts
 posts.get('/', async (c) => {
