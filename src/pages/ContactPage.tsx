@@ -3,16 +3,9 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
 import { CustomSelect } from '../components/ui/CustomSelect';
+import { getContactInfo, ContactItem } from '../lib/api';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api-production.jkapa0417.workers.dev';
-
-interface ContactItem {
-    id: number;
-    key: string;
-    value: string;
-    label: string;
-    label_ko: string | null;
-}
 
 const ContactPage = () => {
     const { i18n } = useTranslation();
@@ -32,13 +25,11 @@ const ContactPage = () => {
     useEffect(() => {
         const fetchContact = async () => {
             try {
-                const response = await fetch(`${API_BASE_URL}/api/content/contact`);
-                const data = await response.json();
-                if (data.contact) {
-                    setContactInfo(data.contact);
-                }
+                const { contacts } = await getContactInfo();
+                setContactInfo(contacts || []);
             } catch (error) {
                 console.error('Failed to fetch contact info:', error);
+                setContactInfo([]);
             } finally {
                 setIsLoading(false);
             }
