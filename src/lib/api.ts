@@ -200,3 +200,16 @@ export async function getCareers(): Promise<{ careers: Career[] }> {
 export async function getSkills(): Promise<{ categories: SkillCategory[] }> {
     return apiFetch('/api/content/skills');
 }
+
+export interface ContactItem {
+    id: number;
+    key: string;
+    value: string;
+    label: string | null;
+    label_ko: string | null;
+    icon: string | null;
+}
+
+export async function getContactInfo(): Promise<{ contacts: ContactItem[] }> {
+    return apiFetch('/api/content/contact');
+}
