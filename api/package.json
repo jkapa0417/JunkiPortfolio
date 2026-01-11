@@ -4,9 +4,9 @@
     "private": true,
     "scripts": {
         "dev": "npx wrangler dev",
-        "deploy": "npx wrangler deploy",
+        "deploy": "npx wrangler deploy --env production",
         "db:migrate": "npx wrangler d1 execute portfolio-blog --local --file=./schema.sql",
-        "db:migrate:prod": "npx wrangler d1 execute portfolio-blog --remote --file=./schema.sql -y"
+        "db:migrate:prod": "npx wrangler d1 execute portfolio-blog-prod --remote --file=./schema.sql -y"
     },
     "dependencies": {
         "hono": "^4.0.0",

@@ -22,3 +22,8 @@ database_id = "cc1dbcd0-e0e6-4429-b581-52bdadd253c2"
 
 [env.production]
 vars = { ENVIRONMENT = "production" }
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "portfolio-blog-prod"
+database_id = "b6acb3a6-8d8e-4526-bdb3-73cdcb093c86"

@@ -33,7 +33,7 @@ const app = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 
 // CORS configuration
 app.use('/*', cors({
-    origin: ['http://localhost:5173', 'https://junki-portfolio.com'],
+    origin: '*', // Allow all origins for initial deployment ease
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization', 'X-User-Id', 'X-User-Admin'],
     credentials: true,
