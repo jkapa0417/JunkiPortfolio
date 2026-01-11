@@ -1,10 +1,14 @@
 import { Hono } from 'hono';
+import { Resend } from 'resend';
 
 type Bindings = {
     DB: D1Database;
+    RESEND_API_KEY: string;
 };
 
 export const content = new Hono<{ Bindings: Bindings }>();
+
+
 
 // ============ CAREERS ============
 
@@ -382,7 +386,54 @@ content.delete('/contact/:key', async (c) => {
     const isAdmin = c.req.header('X-User-Admin') === 'true';
     if (!isAdmin) return c.json({ error: 'Admin access required' }, 403);
 
-    const key = c.req.param('key');
-    await c.env.DB.prepare('DELETE FROM contact_info WHERE key = ?').bind(key).run();
     return c.json({ success: true });
+});
+
+// ============ MESSAGES ============
+
+content.post('/messages', async (c) => {
+    try {
+        const body = await c.req.json();
+        const { name, email, subject, message } = body;
+
+        console.log('[API] Received message from:', email);
+
+        if (!name || !email || !message) {
+            return c.json({ error: 'Missing required fields' }, 400);
+        }
+
+        // Save to Database
+        await c.env.DB.prepare(
+            'INSERT INTO messages (name, email, subject, message) VALUES (?, ?, ?, ?)'
+        ).bind(name, email, subject || 'No Subject', message).run();
+
+        // Send Email via Resend
+        if (c.env.RESEND_API_KEY) {
+            try {
+                const resend = new Resend(c.env.RESEND_API_KEY);
+                await resend.emails.send({
+                    from: 'Portfolio Contact <onboarding@resend.dev>',
+                    to: 'jkapa0417@gmail.com',
+                    subject: `[Portfolio] ${subject || 'New Message'} from ${name}`,
+                    html: `
+                        <h2>New Contact Message</h2>
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Subject:</strong> ${subject}</p>
+                        <br/>
+                        <p><strong>Message:</strong></p>
+                        <p>${message.replace(/\n/g, '<br>')}</p>
+                    `
+                });
+                console.log('[API] Email sent via Resend');
+            } catch (emailError) {
+                console.error('[API] Failed to send email:', emailError);
+            }
+        }
+
+        return c.json({ success: true }, 201);
+    } catch (error: any) {
+        console.error('Error saving message:', error);
+        return c.json({ error: error.message || 'Failed to send message' }, 500);
+    }
 });
