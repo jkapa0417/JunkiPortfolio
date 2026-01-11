@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
 import { CustomSelect } from '../components/ui/CustomSelect';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api-production.jkapa0417.workers.dev';
 
 interface ContactItem {
     id: number;
@@ -58,13 +58,28 @@ const ContactPage = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/content/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formState),
+            });
 
-        console.log('Form submitted:', formState);
-        setIsSubmitting(false);
-        setSubmitted(true);
-        setFormState({ name: '', email: '', subject: '', message: '' });
+            if (!response.ok) {
+                throw new Error('Failed to send message');
+            }
+
+            console.log('Form submitted successfully');
+            setSubmitted(true);
+            setFormState({ name: '', email: '', subject: '', message: '' });
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert(i18n.language === 'ko' ? '메시지 전송에 실패했습니다.' : 'Failed to send message. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     // Helper to find specific contact item

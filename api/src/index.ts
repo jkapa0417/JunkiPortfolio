@@ -18,6 +18,7 @@ type Bindings = {
     ADMIN_EMAILS: string;
 
     ENVIRONMENT: string;
+    RESEND_API_KEY: string;
 };
 
 type Variables = {
