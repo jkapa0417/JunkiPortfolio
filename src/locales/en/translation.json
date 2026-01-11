@@ -24,5 +24,43 @@
   "about_me": "About Me",
   "contact_us": "Contact",
   "developed": "Development",
-  "process": "Process"
+  "process": "Process",
+  "editor": {
+    "title": {
+      "create": "Create New Post",
+      "edit": "Edit Post"
+    },
+    "back_to_blog": "Back to Blog",
+    "button": {
+      "save_draft": "Save Draft",
+      "publish": "Publish",
+      "upload": "Upload"
+    },
+    "section": {
+      "basic_info": "Basic Information",
+      "content": "Content",
+      "cover_image": "Cover Image"
+    },
+    "label": {
+      "title": "Title",
+      "slug": "Slug",
+      "category": "Category",
+      "read_time": "Read Time (min)",
+      "excerpt": "Excerpt"
+    },
+    "placeholder": {
+      "title": "Enter post title",
+      "category": "Select category",
+      "excerpt": "Brief description of the post",
+      "content": "Write your content here...",
+      "cover_image": "Enter image URL or upload"
+    },
+    "error": {
+      "load_failed": "Failed to load post",
+      "required_fields": "Please fill in title, content, and category",
+      "save_failed": "Failed to save post"
+    },
+    "loading": "Loading post...",
+    "tip": "💡 Tip: Use Markdown syntax for formatting. Drag & drop images or paste them to upload."
+  }
 }

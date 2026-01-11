@@ -6,9 +6,9 @@
   "intro_suffix": "입니다.",
   "sub_prefix": "",
   "sub_suffix": "",
-  "subintro_prefix":"",
+  "subintro_prefix": "",
   "tech_stack": "React, FastAPI, AWS, Cloudflare",
-  "subintro_suffix":"등 다양한 기술 스택을 사용하여 프론트엔드, 백엔드, 클라우드와 데이터를 모두 아우르는 개발을 진행하고 있습니다.",
+  "subintro_suffix": "등 다양한 기술 스택을 사용하여 프론트엔드, 백엔드, 클라우드와 데이터를 모두 아우르는 개발을 진행하고 있습니다.",
   "conclusion": "최고의 기술력과 열정을 바탕으로 함께 성장하고 발전할 수 있는 프로젝트를 찾고 있습니다.",
   "view_project": "프로젝트 보기",
   "no_demo": "사내 규정 인해 프로젝트 공유를 할 수 없었습니다.",
@@ -24,6 +24,43 @@
   "about_me": "자기소개",
   "contact_us": "연락 방법",
   "developed": "본인 역할",
-  "process": "진행 방식"
-
+  "process": "진행 방식",
+  "editor": {
+    "title": {
+      "create": "새 글 작성",
+      "edit": "글 수정"
+    },
+    "back_to_blog": "블로그로 돌아가기",
+    "button": {
+      "save_draft": "임시 저장",
+      "publish": "발행하기",
+      "upload": "업로드"
+    },
+    "section": {
+      "basic_info": "기본 정보",
+      "content": "내용",
+      "cover_image": "커버 이미지"
+    },
+    "label": {
+      "title": "제목",
+      "slug": "슬러그 (URL)",
+      "category": "카테고리",
+      "read_time": "읽는 시간 (분)",
+      "excerpt": "요약"
+    },
+    "placeholder": {
+      "title": "글 제목을 입력하세요",
+      "category": "카테고리 선택",
+      "excerpt": "글에 대한 간단한 설명을 입력하세요",
+      "content": "내용을 입력하세요...",
+      "cover_image": "이미지 URL 입력 또는 업로드"
+    },
+    "error": {
+      "load_failed": "글을 불러오는데 실패했습니다",
+      "required_fields": "제목, 내용, 카테고리를 입력해주세요",
+      "save_failed": "글 저장에 실패했습니다"
+    },
+    "loading": "글 불러오는 중...",
+    "tip": "💡 팁: 마크다운 문법을 사용할 수 있습니다. 이미지를 드래그 앤 드롭하거나 붙여넣기하여 업로드할 수 있습니다."
+  }
 }

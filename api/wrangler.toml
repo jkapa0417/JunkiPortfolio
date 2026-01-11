@@ -1,0 +1,29 @@
+name = "portfolio-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ENVIRONMENT = "development"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "portfolio-blog"
+database_id = "cc1dbcd0-e0e6-4429-b581-52bdadd253c2"
+
+# Environment variables (set these in Cloudflare dashboard or use wrangler secret)
+# GITHUB_CLIENT_ID = ""
+# GITHUB_CLIENT_SECRET = ""
+# GOOGLE_CLIENT_ID = ""
+# GOOGLE_CLIENT_SECRET = ""
+# JWT_SECRET = ""
+# ADMIN_EMAILS = ""  # Comma-separated list of admin emails
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "portfolio-blog-prod"
+database_id = "b6acb3a6-8d8e-4526-bdb3-73cdcb093c86"

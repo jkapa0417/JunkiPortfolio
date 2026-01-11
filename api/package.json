@@ -1,0 +1,20 @@
+{
+    "name": "portfolio-api",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "npx wrangler dev",
+        "deploy": "npx wrangler deploy --env production",
+        "db:migrate": "npx wrangler d1 execute portfolio-blog --local --file=./schema.sql",
+        "db:migrate:prod": "npx wrangler d1 execute portfolio-blog-prod --remote --file=./schema.sql -y"
+    },
+    "dependencies": {
+        "hono": "^4.0.0",
+        "jose": "^5.0.0"
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.0.0",
+        "typescript": "^5.0.0",
+        "wrangler": "^3.0.0"
+    }
+}
