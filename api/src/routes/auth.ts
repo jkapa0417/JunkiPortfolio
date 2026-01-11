@@ -9,6 +9,7 @@ type Bindings = {
     GOOGLE_CLIENT_SECRET: string;
     JWT_SECRET: string;
     ADMIN_EMAILS: string;
+    ENVIRONMENT: string;
 };
 
 type User = {
