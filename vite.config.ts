@@ -1,11 +1,21 @@
+
 import { defineConfig } from 'vite'
 import path from 'path'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import svgr from 'vite-plugin-svgr';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), svgr()],
+  plugins: [
+    react({
+      babel: {
+        plugins: ['babel-plugin-react-compiler'],
+      },
+    }),
+    tailwindcss(),
+    svgr(),
+  ],
   resolve: {
     alias: {
       '@assets': path.resolve(__dirname, 'src/assets'), // Define alias for assets

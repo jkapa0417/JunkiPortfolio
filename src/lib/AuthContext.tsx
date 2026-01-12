@@ -21,6 +21,11 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+
+const navigateTo = (url: string) => {
+    window.location.href = url;
+};
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const loginWithGitHub = async () => {
         try {
             const { url } = await getGitHubAuthUrl();
-            window.location.href = url;
+            navigateTo(url);
         } catch (error) {
             console.error('GitHub login error:', error);
         }
@@ -52,7 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const loginWithGoogle = async () => {
         try {
             const { url } = await getGoogleAuthUrl();
-            window.location.href = url;
+            navigateTo(url);
         } catch (error) {
             console.error('Google login error:', error);
         }
