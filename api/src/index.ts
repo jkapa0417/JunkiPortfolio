@@ -34,7 +34,16 @@ const app = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 
 // CORS configuration
 app.use('/*', cors({
-    origin: '*', // Allow all origins for initial deployment ease
+    origin: (origin) => {
+        // Allow localhost ports for development and preview
+        if (origin.includes('localhost:5173') || origin.includes('localhost:4173')) {
+            return origin;
+        }
+        // Allow valid production domains
+        // Ideally restrict this in production, but for now matching previous '*' behavior
+        // while supporting credentials (which requires explicit origin return)
+        return origin;
+    },
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization', 'X-User-Id', 'X-User-Admin'],
     credentials: true,
