@@ -31,4 +31,12 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    proxy: {
+      '/sitemap.xml': {
+        target: 'https://portfolio-api.jkapa0417.workers.dev',
+        changeOrigin: true,
+      },
+    },
+  },
 })
