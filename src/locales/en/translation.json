@@ -22,6 +22,7 @@
   "projects": "Projects",
   "skills": "Skills",
   "about_me": "About Me",
+  "about_description": "I am a Full Stack Developer specialized in integrating advanced AI solutions into scalable web applications. My passion lies in bridging the gap between cutting-edge Generative AI and practical user experiences. With deep expertise in Python, RAG architectures, and cloud infrastructure, I build intelligent systems that solve real-world problems, while ensuring robust performance using modern React and Node.js stacks.",
   "contact_us": "Contact",
   "developed": "Development",
   "process": "Process",
