@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { sitemap } from './routes/sitemap';
 import { cors } from 'hono/cors';
 import { posts } from './routes/posts';
 import { comments } from './routes/comments';
@@ -62,6 +63,7 @@ app.get('/', (c) => {
 });
 
 // Mount routes
+app.route('/sitemap.xml', sitemap);
 app.route('/api/posts', posts);
 app.route('/api/comments', comments);
 app.route('/api/auth', auth);
