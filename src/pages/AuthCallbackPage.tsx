@@ -19,6 +19,9 @@ const AuthCallbackPage = () => {
                 const returnTo = sessionStorage.getItem('auth_return_to') || '/';
                 sessionStorage.removeItem('auth_return_to');
                 navigate(returnTo, { replace: true });
+            }).catch((err) => {
+                console.error('Login failed:', err);
+                navigate('/', { replace: true });
             });
         } else if (error) {
             console.error('Auth error:', error);

@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../lib/AuthContext';
 import { getComments, createComment, deleteComment, Comment } from '../../lib/api';
 import { LoadingSpinner } from '../ui/Loading';
-
-// API URL for edit
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
+import { API_BASE_URL } from '../../lib/api';
 
 const CommentItem = ({ comment, depth = 0, onReply, onDelete, onEdit, isAdmin, currentUserId, replyingTo, onSubmitReply, isSubmitting }: any) => {
     const { i18n } = useTranslation();

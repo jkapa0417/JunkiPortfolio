@@ -7,9 +7,7 @@ import { useAuth } from '../lib/AuthContext';
 import { getAdminPost } from '../lib/api';
 import { LoadingSpinner, PageLoader } from '../components/ui/Loading';
 import { CustomSelect } from '../components/ui/CustomSelect';
-
-// API URL for direct calls
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
+import { API_BASE_URL } from '../lib/api';
 
 interface PostFormData {
     slug: string;
