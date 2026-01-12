@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import SplitText from '../components/reactbits/SplitText';
 import ShinyText from '../components/reactbits/ShinyText';
 import { getCareers, getSkills, Career, SkillCategory } from '../lib/api';
+import SEO from '../components/SEO';
+import { PersonSchema } from '../components/Schema';
 
 const HomePage = () => {
     const { i18n } = useTranslation();
@@ -49,6 +51,14 @@ const HomePage = () => {
 
     return (
         <div ref={containerRef} className="relative">
+            <SEO
+                title={i18n.language === 'ko' ? "홈" : "Home"}
+                description={i18n.language === 'ko'
+                    ? "풀스택 개발자 Jun Ki Ahn의 포트폴리오 메인 페이지입니다."
+                    : "Main page of Full Stack Developer Jun Ki Ahn's Portfolio."
+                }
+            />
+            <PersonSchema />
             {/* Hero Section with Parallax */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
                 {/* Animated Background */}

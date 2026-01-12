@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://junki-portfolio.com/sitemap.xml

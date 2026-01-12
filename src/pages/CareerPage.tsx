@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
+import SEO from '../components/SEO';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
 
@@ -74,6 +75,13 @@ const CareerPage = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4">
+            <SEO
+                title={i18n.language === 'ko' ? "경력" : "Career"}
+                description={i18n.language === 'ko'
+                    ? "Jun Ki Ahn의 경력 사항입니다. LG전자 등에서의 근무 경험을 확인하세요."
+                    : "Career history of Jun Ki Ahn. Check out professional experiences including LG Electronics."
+                }
+            />
             <div className="max-w-5xl mx-auto">
                 {/* Header */}
                 <motion.div
