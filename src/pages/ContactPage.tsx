@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
 import { CustomSelect } from '../components/ui/CustomSelect';
 import { getContactInfo, ContactItem } from '../lib/api';
+import SEO from '../components/SEO';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api-production.jkapa0417.workers.dev';
 
@@ -122,6 +123,13 @@ const ContactPage = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4">
+            <SEO
+                title={i18n.language === 'ko' ? "연락하기" : "Contact"}
+                description={i18n.language === 'ko'
+                    ? "Jun Ki Ahn에게 연락하세요. 프로젝트 협업, 채용 문의 등 다양한 대화를 환영합니다."
+                    : "Contact Jun Ki Ahn. Open for project collaborations, job opportunities, and more."
+                }
+            />
             <div className="max-w-5xl mx-auto">
                 {/* Header */}
                 <motion.div

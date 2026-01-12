@@ -11,4 +11,14 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, 'src/assets'), // Define alias for assets
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['framer-motion', 'gsap'],
+        },
+      },
+    },
+  },
 })

@@ -1,15 +1,24 @@
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from './components/templates/MainLayout';
-import HomePage from './pages/HomePage';
-import CareerPage from './pages/CareerPage';
-import SkillsPage from './pages/SkillsPage';
-import ProjectsPage from './pages/ProjectsPage';
-import BlogPage from './pages/BlogPage';
-import BlogPostPage from './pages/BlogPostPage';
-import BlogEditorPage from './pages/BlogEditorPage';
-import ContactPage from './pages/ContactPage';
-import AuthCallbackPage from './pages/AuthCallbackPage';
-import AdminDashboard from './pages/AdminDashboard';
+import { LoadingSpinner } from './components/ui/Loading';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const CareerPage = lazy(() => import('./pages/CareerPage'));
+const SkillsPage = lazy(() => import('./pages/SkillsPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const BlogEditorPage = lazy(() => import('./pages/BlogEditorPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const AuthCallbackPage = lazy(() => import('./pages/AuthCallbackPage'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+
+const Loading = () => (
+    <div className="min-h-screen pt-24 pb-20 flex items-center justify-center">
+        <LoadingSpinner size="lg" />
+    </div>
+);
 
 const router = createBrowserRouter([
     {
@@ -18,47 +27,91 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <HomePage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <HomePage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'career',
-                element: <CareerPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <CareerPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'skills',
-                element: <SkillsPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <SkillsPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'projects',
-                element: <ProjectsPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <ProjectsPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'blog',
-                element: <BlogPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <BlogPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'blog/new',
-                element: <BlogEditorPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <BlogEditorPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'blog/edit/:slug',
-                element: <BlogEditorPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <BlogEditorPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'blog/:slug',
-                element: <BlogPostPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <BlogPostPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'contact',
-                element: <ContactPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <ContactPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'auth/callback',
-                element: <AuthCallbackPage />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <AuthCallbackPage />
+                    </Suspense>
+                ),
             },
             {
                 path: 'admin',
-                element: <AdminDashboard />,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <AdminDashboard />
+                    </Suspense>
+                ),
             },
         ],
     },

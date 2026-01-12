@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
+import SEO from '../components/SEO';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
 
@@ -81,6 +82,13 @@ const ProjectsPage = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4">
+            <SEO
+                title={i18n.language === 'ko' ? "프로젝트" : "Projects"}
+                description={i18n.language === 'ko'
+                    ? "Jun Ki Ahn의 프로젝트 포트폴리오입니다. LG전자 등에서 진행한 다양한 프로젝트를 확인하세요."
+                    : "Project portfolio of Jun Ki Ahn. Explore various projects including work at LG Electronics."
+                }
+            />
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <motion.div
