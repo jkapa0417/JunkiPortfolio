@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
+import SEO from '../components/SEO';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
 
@@ -77,6 +78,13 @@ const SkillsPage = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4">
+            <SEO
+                title={i18n.language === 'ko' ? "기술 스택" : "Skills"}
+                description={i18n.language === 'ko'
+                    ? "Jun Ki Ahn의 기술 스택입니다. Frontend, Backend, AI, Cloud 등 보유 기술을 확인하세요."
+                    : "Technical skills of Jun Ki Ahn. Explore expertise in Frontend, Backend, AI, and Cloud."
+                }
+            />
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <motion.div

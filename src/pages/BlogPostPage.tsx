@@ -6,6 +6,8 @@ import { getPost, Post } from '../lib/api';
 import MDEditor from '@uiw/react-md-editor';
 import { PageLoader } from '../components/ui/Loading';
 import CommentSection from '../components/blog/CommentSection';
+import SEO from '../components/SEO';
+import { BlogPostingSchema } from '../components/Schema';
 
 const BlogPostPage = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -71,6 +73,22 @@ const BlogPostPage = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4">
+            {post && (
+                <>
+                    <SEO
+                        title={title}
+                        description={i18n.language === 'ko' && post.excerpt_ko ? post.excerpt_ko : post.excerpt || title}
+                        image={post.cover_image || "/favicon.svg"}
+                        type="article"
+                    />
+                    <BlogPostingSchema
+                        title={title}
+                        description={i18n.language === 'ko' && post.excerpt_ko ? post.excerpt_ko : post.excerpt || title}
+                        datePublished={post.created_at}
+                        image={post.cover_image || "/favicon.svg"}
+                    />
+                </>
+            )}
             <article className="max-w-3xl mx-auto">
                 {/* Back Link */}
                 <motion.div

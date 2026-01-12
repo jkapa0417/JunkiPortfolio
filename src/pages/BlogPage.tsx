@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { getPosts, getCategories, Post } from '../lib/api';
 import { LoadingCard } from '../components/ui/Loading';
 import { useAuth } from '../lib/AuthContext';
+import SEO from '../components/SEO';
 
 // API URL for delete
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
@@ -85,6 +86,13 @@ const BlogPage = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-20 px-4">
+            <SEO
+                title={i18n.language === 'ko' ? "블로그" : "Blog"}
+                description={i18n.language === 'ko'
+                    ? "Jun Ki Ahn의 기술 블로그입니다. 개발, AI, 클라우드 등 다양한 이야기를 공유합니다."
+                    : "Tech blog of Jun Ki Ahn. Sharing thoughts on development, AI, Cloud, and more."
+                }
+            />
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <motion.div
