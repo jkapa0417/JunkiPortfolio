@@ -10,6 +10,7 @@ type Bindings = {
     JWT_SECRET: string;
     ADMIN_EMAILS: string;
     ENVIRONMENT: string;
+    FRONTEND_URL: string;
 };
 
 type User = {
@@ -202,9 +203,9 @@ auth.get('/github/callback', async (c) => {
         const token = await generateToken(user, c.env.JWT_SECRET);
 
         // Redirect back to frontend with token
-        const frontendUrl = c.env.ENVIRONMENT === 'production'
+        const frontendUrl = c.env.FRONTEND_URL || (c.env.ENVIRONMENT === 'production'
             ? 'https://junki-portfolio.com'
-            : 'http://localhost:5173';
+            : 'http://localhost:5173');
 
         return c.redirect(`${frontendUrl}/auth/callback?token=${token}`);
     } catch (error) {
@@ -308,9 +309,9 @@ auth.get('/google/callback', async (c) => {
         const token = await generateToken(user, c.env.JWT_SECRET);
 
         // Redirect back to frontend with token
-        const frontendUrl = c.env.ENVIRONMENT === 'production'
+        const frontendUrl = c.env.FRONTEND_URL || (c.env.ENVIRONMENT === 'production'
             ? 'https://junki-portfolio.com'
-            : 'http://localhost:5173';
+            : 'http://localhost:5173');
 
         return c.redirect(`${frontendUrl}/auth/callback?token=${token}`);
     } catch (error) {

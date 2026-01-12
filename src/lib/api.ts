@@ -1,5 +1,10 @@
 // API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
+const isDevelopment = import.meta.env.DEV || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+// Export API_BASE_URL so it can be used throughout the app
+export const API_BASE_URL = import.meta.env.VITE_API_URL || (isDevelopment
+    ? 'https://portfolio-api.jkapa0417.workers.dev'
+    : 'https://portfolio-api-production.jkapa0417.workers.dev');
 
 // Types
 export interface Post {
