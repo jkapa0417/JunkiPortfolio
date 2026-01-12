@@ -23,7 +23,7 @@ database_id = "cc1dbcd0-e0e6-4429-b581-52bdadd253c2"
 # ADMIN_EMAILS = ""  # Comma-separated list of admin emails
 
 [env.production]
-vars = { ENVIRONMENT = "production", FRONTEND_URL = "https://junki-portfolio.com" }
+vars = { ENVIRONMENT = "production", FRONTEND_URL = "https://junki-portfolio.com", ADMIN_EMAILS = "jkapa0417@gmail.com" }
 
 [[env.production.d1_databases]]
 binding = "DB"

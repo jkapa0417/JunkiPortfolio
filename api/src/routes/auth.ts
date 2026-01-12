@@ -62,8 +62,8 @@ function generateUserId(): string {
 }
 
 // Check if email is admin
-function isAdminEmail(email: string | null, adminEmails: string): boolean {
-    if (!email) return false;
+function isAdminEmail(email: string | null, adminEmails: string | undefined | null): boolean {
+    if (!email || !adminEmails) return false;
     const admins = adminEmails.split(',').map(e => e.trim().toLowerCase());
     return admins.includes(email.toLowerCase());
 }
@@ -110,13 +110,22 @@ auth.get('/github', (c) => {
 // GitHub OAuth: Callback
 auth.get('/github/callback', async (c) => {
     const code = c.req.query('code');
+    const redirectUri = `${new URL(c.req.url).origin}/api/auth/github/callback`;
+
+    console.log('[GitHub Debug] Callback triggered');
+    console.log('[GitHub Debug] Code present:', !!code);
+    console.log('[GitHub Debug] Redirect URI:', redirectUri);
+    console.log('[GitHub Debug] Client ID (masked):', c.env.GITHUB_CLIENT_ID?.substring(0, 4) + '...');
+    console.log('[GitHub Debug] Client Secret present:', !!c.env.GITHUB_CLIENT_SECRET);
 
     if (!code) {
+        console.error('[GitHub Error] No code provided');
         return c.json({ error: 'No code provided' }, 400);
     }
 
     try {
         // Exchange code for access token
+        console.log('[GitHub Debug] Exchanging code for token...');
         const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
             method: 'POST',
             headers: {
@@ -127,20 +136,27 @@ auth.get('/github/callback', async (c) => {
                 client_id: c.env.GITHUB_CLIENT_ID,
                 client_secret: c.env.GITHUB_CLIENT_SECRET,
                 code,
+                redirect_uri: redirectUri,
             }),
         });
 
-        const tokenData = await tokenResponse.json() as { access_token?: string; error?: string };
+        const tokenData = await tokenResponse.json() as { access_token?: string; error?: string; error_description?: string };
+        console.log('[GitHub Debug] Token response:', tokenData.error ? 'Error' : 'Success');
+        if (tokenData.error) {
+            console.error('[GitHub Error] Token exchange failed:', tokenData.error, tokenData.error_description);
+        }
 
         if (tokenData.error || !tokenData.access_token) {
-            return c.json({ error: 'Failed to get access token' }, 400);
+            return c.json({ error: 'Failed to get access token', details: tokenData }, 400);
         }
 
         // Get user info
+        console.log('[GitHub Debug] Fetching user profile...');
         const userResponse = await fetch('https://api.github.com/user', {
             headers: {
                 'Authorization': `Bearer ${tokenData.access_token}`,
                 'Accept': 'application/json',
+                'User-Agent': 'Cloudflare-Worker-Auth',
             },
         });
 
@@ -151,18 +167,22 @@ auth.get('/github/callback', async (c) => {
             email: string | null;
             avatar_url: string;
         };
+        console.log('[GitHub Debug] User fetched:', githubUser.login, '(ID:', githubUser.id, ')');
 
         // Get email if not public
         let email = githubUser.email;
         if (!email) {
+            console.log('[GitHub Debug] Email hidden, fetching emails...');
             const emailsResponse = await fetch('https://api.github.com/user/emails', {
                 headers: {
                     'Authorization': `Bearer ${tokenData.access_token}`,
                     'Accept': 'application/json',
+                    'User-Agent': 'Cloudflare-Worker-Auth',
                 },
             });
             const emails = await emailsResponse.json() as Array<{ email: string; primary: boolean }>;
             email = emails.find(e => e.primary)?.email || null;
+            console.log('[GitHub Debug] Primary email found:', email);
         }
 
         // Find or create user
@@ -171,6 +191,7 @@ auth.get('/github/callback', async (c) => {
         ).bind('github', githubUser.id.toString()).first<User>();
 
         if (!user) {
+            console.log('[GitHub Debug] User not found in DB, creating new user...');
             const userId = generateUserId();
             const isAdmin = isAdminEmail(email, c.env.ADMIN_EMAILS);
 
@@ -197,20 +218,24 @@ auth.get('/github/callback', async (c) => {
                 is_admin: isAdmin,
                 created_at: new Date().toISOString(),
             };
+        } else {
+            console.log('[GitHub Debug] User found in DB:', user.id);
         }
 
         // Generate JWT
         const token = await generateToken(user, c.env.JWT_SECRET);
+        console.log('[GitHub Debug] JWT generated');
 
         // Redirect back to frontend with token
         const frontendUrl = c.env.FRONTEND_URL || (c.env.ENVIRONMENT === 'production'
             ? 'https://junki-portfolio.com'
             : 'http://localhost:5173');
 
+        console.log('[GitHub Debug] Redirecting to:', `${frontendUrl}/auth/callback`);
         return c.redirect(`${frontendUrl}/auth/callback?token=${token}`);
     } catch (error) {
-        console.error('GitHub OAuth error:', error);
-        return c.json({ error: 'Authentication failed' }, 500);
+        console.error('[GitHub Critical Error] OAuth flow failed:', error);
+        return c.json({ error: 'Authentication failed', details: String(error) }, 500);
     }
 });
 
