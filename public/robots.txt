@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio-api-production.jkapa0417.workers.dev/sitemap.xml
+Sitemap: https://junki-portfolio.com/sitemap.xml
