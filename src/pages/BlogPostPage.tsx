@@ -137,7 +137,11 @@ const BlogPostPage = () => {
                     className="glass-card p-8 md:p-12 mb-12"
                 >
                     <div data-color-mode="dark">
-                        <MDEditor.Markdown source={content} style={{ whiteSpace: 'pre-wrap', backgroundColor: 'transparent' }} />
+                        <MDEditor.Markdown
+                            source={content}
+                            className="wmde-markdown"
+                            style={{ backgroundColor: 'transparent', color: 'inherit' }}
+                        />
                     </div>
                 </motion.div>
 
