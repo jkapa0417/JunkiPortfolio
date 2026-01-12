@@ -32,12 +32,13 @@ export const PersonSchema = () => (
                 "https://github.com/jkapa0417", // Replace with actual profile
                 "https://www.linkedin.com/in/junki-ahn-1b1b1b1b/" // Replace with actual profile if different
             ],
-            jobTitle: "Full Stack Developer",
+            jobTitle: ["Full Stack Developer", "Frontend Developer", "Software Engineer", "AI Engineer"],
             worksFor: {
                 "@type": "Organization",
                 "name": "LG Electronics"
             },
-            description: "Full Stack Developer and Data Scientist specializing in Cloud and AI solutions."
+            description: "Full Stack Developer specializing in modern web technologies, cloud infrastructure, and AI solutions.",
+            knowsAbout: ["JavaScript", "TypeScript", "React", "Node.js", "Python", "Artificial Intelligence", "LLM", "Generative AI", "RAG", "Cloud Computing", "Web Development"]
         }}
     />
 );
