@@ -3,8 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
 import SEO from '../components/SEO';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
+import { API_BASE_URL } from '../lib/api';
 
 interface CareerItem {
     id: number;

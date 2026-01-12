@@ -3,10 +3,8 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../components/ui/Loading';
 import { CustomSelect } from '../components/ui/CustomSelect';
-import { getContactInfo, ContactItem } from '../lib/api';
+import { getContactInfo, ContactItem, API_BASE_URL } from '../lib/api';
 import SEO from '../components/SEO';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api-production.jkapa0417.workers.dev';
 
 const ContactPage = () => {
     const { i18n } = useTranslation();

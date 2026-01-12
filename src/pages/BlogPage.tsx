@@ -6,9 +6,7 @@ import { getPosts, getCategories, Post } from '../lib/api';
 import { LoadingCard } from '../components/ui/Loading';
 import { useAuth } from '../lib/AuthContext';
 import SEO from '../components/SEO';
-
-// API URL for delete
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://portfolio-api.jkapa0417.workers.dev';
+import { API_BASE_URL } from '../lib/api';
 
 const BlogPage = () => {
     const { i18n } = useTranslation();

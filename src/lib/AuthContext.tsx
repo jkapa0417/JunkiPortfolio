@@ -5,7 +5,6 @@ import {
     getGitHubAuthUrl,
     getGoogleAuthUrl,
     logout as apiLogout,
-    setAuthToken,
     removeAuthToken
 } from './api';
 
@@ -30,22 +29,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
             const { user } = await getCurrentUser();
             setUser(user);
-        } catch {
+        } catch (error) {
             setUser(null);
+            throw error;
         }
     }, []);
 
     useEffect(() => {
-        // Check for token in URL (OAuth callback)
-        const params = new URLSearchParams(window.location.search);
-        const token = params.get('token');
-
-        if (token) {
-            setAuthToken(token);
-            // Clean URL
-            window.history.replaceState({}, '', window.location.pathname);
-        }
-
         // Load current user
         refreshUser().finally(() => setIsLoading(false));
     }, [refreshUser]);
