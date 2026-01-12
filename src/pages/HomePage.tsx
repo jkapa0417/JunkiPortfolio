@@ -52,10 +52,10 @@ const HomePage = () => {
     return (
         <div ref={containerRef} className="relative">
             <SEO
-                title={i18n.language === 'ko' ? "홈" : "Home"}
+                title={i18n.language === 'ko' ? "풀스택 개발자 포트폴리오" : "Full Stack Developer Portfolio"}
                 description={i18n.language === 'ko'
-                    ? "풀스택 개발자 Jun Ki Ahn의 포트폴리오 메인 페이지입니다."
-                    : "Main page of Full Stack Developer Jun Ki Ahn's Portfolio."
+                    ? "React, Node.js, Python 전문 풀스택 개발자의 포트폴리오입니다. 최신 웹 기술과 클라우드 인프라 구축 경험을 확인하세요."
+                    : "Portfolio of a Full Stack Developer specializing in React, Node.js, and Python. Explore projects, skills, and experience in modern web development."
                 }
             />
             <PersonSchema />
