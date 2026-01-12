@@ -189,13 +189,7 @@ const HomePage = () => {
                             {i18n.language === 'ko' ? '소개' : 'About Me'}
                         </h2>
                         <p className="text-lg text-white/70 leading-relaxed mb-8">
-                            {currentCareer ? (
-                                getLocalizedText(currentCareer.description, currentCareer.description_ko)
-                            ) : (
-                                i18n.language === 'ko'
-                                    ? '풀스택 개발과 데이터 사이언스 분야에서 혁신적인 솔루션을 구축하고 있습니다.'
-                                    : 'Building innovative solutions in full-stack development and data science.'
-                            )}
+                            {i18n.language === 'ko' ? i18n.t('about_description') : i18n.t('about_description')}
                         </p>
                         <Link to="/career" className="glass-button inline-flex">
                             {i18n.language === 'ko' ? '경력 보기' : 'View My Journey'}
